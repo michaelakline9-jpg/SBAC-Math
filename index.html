@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3rd Grade SBAC Math Practice</title>
+    <style>
+        /* ============================================
+           KID-FRIENDLY STYLING
+           ============================================ */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            padding: 30px;
+            min-height: calc(100vh - 40px);
+        }
+
+        /* Header Styles */
+        h1 {
+            font-size: 2.5em;
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            font-size: 2em;
+            color: #764ba2;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            color: #555;
+            margin: 15px 0;
+        }
+
+        /* Navigation */
+        .nav-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 20px 30px;
+            font-size: 1.3em;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: bold;
+            min-width: 200px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Section Styles */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .welcome-message {
+            text-align: center;
+            font-size: 1.4em;
+            color: #555;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+
+        /* Progress Tracker */
+        .progress-bar {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 30px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .score-display {
+            text-align: center;
+            font-size: 1.5em;
+            margin: 15px 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        /* Question Styles */
+        .question-container {
+            background: #f9f9f9;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 3px solid #667eea;
+        }
+
+        .question-number {
+            font-size: 1.2em;
+            color: #764ba2;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            margin: 15px 0;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Visual Models */
+        .visual-model {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .number-line {
+            position: relative;
+            height: 60px;
+            margin: 20px 0;
+            border-bottom: 3px solid #333;
+        }
+
+        .number-line-tick {
+            position: absolute;
+            bottom: 0;
+            width: 2px;
+            height: 15px;
+            background: #333;
+        }
+
+        .number-line-label {
+            position: absolute;
+            bottom: -25px;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .array-model {
+            display: inline-grid;
+            gap: 5px;
+            margin: 15px;
+        }
+
+        .array-cell {
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            border: 2px solid #764ba2;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .area-model {
+            display: inline-block;
+            border: 3px solid #667eea;
+            margin: 15px;
+            background: #e8e8ff;
+        }
+
+        .area-unit {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 1px solid #667eea;
+            background: #fff;
+        }
+
+        /* Answer Options */
+        .answer-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .answer-btn {
+            background: white;
+            border: 3px solid #667eea;
+            padding: 15px 20px;
+            font-size: 1.2em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            color: #333;
+        }
+
+        .answer-btn:hover {
+            background: #e8e8ff;
+            transform: translateX(5px);
+        }
+
+        .answer-btn.correct {
+            background: #4CAF50;
+            color: white;
+            border-color: #45a049;
+        }
+
+        .answer-btn.incorrect {
+            background: #f44336;
+            color: white;
+            border-color: #d32f2f;
+        }
+
+        .answer-btn:disabled {
+            cursor: not-allowed;
+        }
+
+        /* Input Fields */
+        .answer-input {
+            font-size: 1.3em;
+            padding: 15px;
+            border: 3px solid #667eea;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 200px;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .submit-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px 5px;
+            font-weight: bold;
+        }
+
+        .submit-btn:hover {
+            background: #45a049;
+        }
+
+        /* Feedback Messages */
+        .feedback {
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #4CAF50;
+        }
+
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f44336;
+        }
+
+        .explanation {
+            margin-top: 10px;
+            font-size: 1em;
+            font-weight: normal;
+            color: #555;
+        }
+
+        /* Encouragement Messages */
+        .encouragement {
+            text-align: center;
+            font-size: 1.5em;
+            color: #4CAF50;
+            margin: 20px 0;
+            font-weight: bold;
+            animation: bounce 0.5s;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Navigation Buttons */
+        .next-btn, .back-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 20px 10px;
+            font-weight: bold;
+        }
+
+        .next-btn:hover, .back-btn:hover {
+            background: #764ba2;
+        }
+
+        .back-btn {
+            background: #999;
+        }
+
+        .back-btn:hover {
+            background: #777;
+        }
+
+        /* Mode Selector */
+        .mode-selector {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .mode-btn {
+            background: white;
+            border: 3px solid #667eea;
+            padding: 10px 20px;
+            font-size: 1.1em;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        .mode-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Sentence Frames */
+        .sentence-frame {
+            background: #fff3cd;
+            border: 2px dashed #ffc107;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 1.2em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.5em; }
+            .nav-btn { min-width: 150px; font-size: 1.1em; padding: 15px 20px; }
+            .question-text { font-size: 1.1em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HOME PAGE -->
+        <div id="home" class="section active">
+            <h1>🌟 3rd Grade Math Practice 🌟</h1>
+            <div class="welcome-message">
+                <p>Welcome! Get ready to practice for your SBAC math test!</p>
+                <p>Choose a topic below to start practicing. You can do it! 💪</p>
+            </div>
+            
+            <div class="score-display">
+                Score: <span id="totalScore">0</span> points
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0%</div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="showSection('multiplication')">
+                    ✖️ Multiplication & Division
+                </button>
+                <button class="nav-btn" onclick="showSection('fractions')">
+                    🍕 Fractions
+                </button>
+                <button class="nav-btn" onclick="showSection('area')">
+                    📐 Area & Perimeter
+                </button>
+                <button class="nav-btn" onclick="showSection('word-problems')">
+                    📝 Multi-step Word Problems
+                </button>
+                <button class="nav-btn" onclick="showSection('vocabulary')">
+                    📚 Math Vocabulary
+                </button>
+                <button class="nav-btn" onclick="showSection('practice')">
+                    ✅ SBAC Practice Questions
+                </button>
+            </div>
+        </div>
+
+        <!-- MULTIPLICATION & DIVISION SECTION -->
+        <div id="multiplication" class="section">
+            <h2>✖️ Multiplication & Division Word Problems</h2>
+            <button class="back-btn" onclick="showSection('home')">← Back to Home</button>
+            <div id="multiplication-questions"></div>
+        </div>
+
+        <!-- FRACTIONS SECTION -->
+        <div id="fractions" class="section">
+            <h2>🍕 Fractions</h2>
+            <button class="back-btn" onclick="showSection('home')">← Back to Home</button>
+            <div id="fractions-questions"></div>
+        </div>
+
+        <!-- AREA & PERIMETER SECTION -->
+        <div id="area" class="section">
+            <h2>📐 Area & Perimeter</h2>
+            <button class="back-btn" onclick="showSection('home')">← Back to Home</button>
+            <div id="area-questions"></div>
+        </div>
+
+        <!-- WORD PROBLEMS SECTION -->
+        <div id="word-problems" class="section">
+            <h2>📝 Multi-step Word Problems</h2>
+            <button class="back-btn" onclick="showSection('home')">← Back to Home</button>
+            <div id="word-problems-questions"></div>
+        </div>
+
+        <!-- VOCABULARY SECTION -->
+        <div id="vocabulary" class="section">
+            <h2>📚 Math Vocabulary Review</h2>
+            <button class="back-btn" onclick="showSection('home')">← Back to Home</button>
+            <div id="vocabulary-questions"></div>
+        </div>
+
+        <!-- PRACTICE SECTION -->
+        <div id="practice" class="section">
+            <h2>✅ SBAC Practice Questions</h2>
+            <button class="back-btn" onclick="showSection('home')">← Back to Home</button>
+            <div id="practice-questions"></div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // GLOBAL VARIABLES
+        // ============================================
+        let totalScore = 0;
+        let totalQuestionsAnswered = 0;
+        let totalQuestions = 0;
+
+        // ============================================
+        // NAVIGATION FUNCTION
+        // ============================================
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Load questions if not already loaded
+            if (sectionId !== 'home') {
+                loadQuestions(sectionId);
+            }
+        }
+
+        // ============================================
+        // QUESTION DATA
+        // ============================================
+        
+        // TO ADD MORE QUESTIONS: Copy a question object and change the values!
+        // Make sure each question has: id, type, question, options (for multiple choice), correctAnswer, explanation
+        
+        const questions = {
+            multiplication: [
+                {
+                    id: 'mult1',
+                    type: 'multiple-choice',
+                    question: 'Maria has 4 boxes. Each box has 6 pencils. How many pencils does Maria have in all?',
+                    options: ['10 pencils', '20 pencils', '24 pencils', '30 pencils'],
+                    correctAnswer: 2,
+                    explanation: '4 boxes × 6 pencils = 24 pencils. You can count: 6 + 6 + 6 + 6 = 24.'
+                },
+                {
+                    id: 'mult2',
+                    type: 'multiple-choice',
+                    question: 'There are 8 students. Each student needs 3 markers. How many markers are needed?',
+                    options: ['11 markers', '24 markers', '21 markers', '32 markers'],
+                    correctAnswer: 1,
+                    explanation: '8 students × 3 markers = 24 markers.'
+                },
+                {
+                    id: 'mult3',
+                    type: 'multiple-choice',
+                    question: 'Jose has 27 stickers. He wants to share them equally with 3 friends. How many stickers will each friend get?',
+                    options: ['7 stickers', '8 stickers', '9 stickers', '10 stickers'],
+                    correctAnswer: 2,
+                    explanation: '27 ÷ 3 = 9. Each friend gets 9 stickers.'
+                },
+                {
+                    id: 'mult4',
+                    type: 'short-answer',
+                    question: 'A teacher has 5 rows of desks. Each row has 7 desks. How many desks are there?',
+                    correctAnswer: '35',
+                    explanation: '5 rows × 7 desks = 35 desks.'
+                },
+                {
+                    id: 'mult5',
+                    type: 'multiple-choice',
+                    question: 'Look at this array. How many dots are there?',
+                    visual: 'array',
+                    visualData: { rows: 3, cols: 4 },
+                    options: ['7 dots', '12 dots', '10 dots', '15 dots'],
+                    correctAnswer: 1,
+                    explanation: '3 rows × 4 columns = 12 dots.'
+                },
+                {
+                    id: 'mult6',
+                    type: 'multiple-choice',
+                    question: 'Emma has 32 cookies. She wants to put them into bags with 4 cookies in each bag. How many bags will she need?',
+                    options: ['6 bags', '7 bags', '8 bags', '9 bags'],
+                    correctAnswer: 2,
+                    explanation: '32 ÷ 4 = 8 bags.'
+                },
+                {
+                    id: 'mult7',
+                    type: 'short-answer',
+                    question: 'There are 6 groups of students. Each group has 5 students. How many students are there in all?',
+                    correctAnswer: '30',
+                    explanation: '6 groups × 5 students = 30 students.'
+                },
+                {
+                    id: 'mult8',
+                    type: 'multiple-choice',
+                    question: 'Carlos has 40 toy cars. He wants to give them equally to 5 friends. How many toy cars will each friend get?',
+                    options: ['6 cars', '7 cars', '8 cars', '9 cars'],
+                    correctAnswer: 2,
+                    explanation: '40 ÷ 5 = 8. Each friend gets 8 toy cars.'
+                }
+            ],
+            
+            fractions: [
+                {
+                    id: 'frac1',
+                    type: 'multiple-choice',
+                    question: 'Look at the number line. What fraction is shown at point A?',
+                    visual: 'number-line',
+                    visualData: { min: 0, max: 1, point: 0.5, label: 'A' },
+                    options: ['1/2', '1/3', '1/4', '2/3'],
+                    correctAnswer: 0,
+                    explanation: 'Point A is halfway between 0 and 1, so it shows 1/2.'
+                },
+                {
+                    id: 'frac2',
+                    type: 'multiple-choice',
+                    question: 'Which fraction is greater: 3/4 or 1/2?',
+                    options: ['1/2 is greater', '3/4 is greater', 'They are equal', 'Cannot tell'],
+                    correctAnswer: 1,
+                    explanation: '3/4 = 0.75 and 1/2 = 0.5. So 3/4 is greater than 1/2.'
+                },
+                {
+                    id: 'frac3',
+                    type: 'multiple-choice',
+                    question: 'Which fraction is equivalent to 1/2?',
+                    options: ['2/3', '2/4', '3/4', '1/3'],
+                    correctAnswer: 1,
+                    explanation: '2/4 = 1/2 because both represent half of a whole.'
+                },
+                {
+                    id: 'frac4',
+                    type: 'multiple-choice',
+                    question: 'Look at the pizza. If 3 out of 8 slices are eaten, what fraction of the pizza is left?',
+                    options: ['3/8', '5/8', '8/3', '1/2'],
+                    correctAnswer: 1,
+                    explanation: '8 slices total - 3 eaten = 5 slices left. So 5/8 of the pizza is left.'
+                },
+                {
+                    id: 'frac5',
+                    type: 'short-answer',
+                    question: 'What fraction is shown? 2 out of 6 parts are shaded.',
+                    correctAnswer: '2/6',
+                    explanation: '2 parts shaded out of 6 total parts = 2/6. This can also be written as 1/3.'
+                },
+                {
+                    id: 'frac6',
+                    type: 'multiple-choice',
+                    question: 'Which fraction is equivalent to 2/3?',
+                    options: ['4/6', '2/4', '3/4', '1/3'],
+                    correctAnswer: 0,
+                    explanation: '2/3 = 4/6 because if you multiply both the numerator and denominator by 2, you get 4/6.'
+                },
+                {
+                    id: 'frac7',
+                    type: 'multiple-choice',
+                    question: 'Compare: 1/4 ___ 1/3',
+                    options: ['> (greater than)', '< (less than)', '= (equal to)', 'Cannot compare'],
+                    correctAnswer: 1,
+                    explanation: 'When the numerators are the same, the fraction with the larger denominator is smaller. So 1/4 < 1/3.'
+                },
+                {
+                    id: 'frac8',
+                    type: 'short-answer',
+                    question: 'What fraction of the circle is shaded? (Write your answer like 3/4)',
+                    correctAnswer: '1/4',
+                    explanation: '1 out of 4 equal parts is shaded, so 1/4.'
+                }
+            ],
+            
+            area: [
+                {
+                    id: 'area1',
+                    type: 'multiple-choice',
+                    question: 'A rectangle is 5 units long and 3 units wide. What is the area?',
+                    visual: 'area',
+                    visualData: { length: 5, width: 3 },
+                    options: ['8 square units', '15 square units', '16 square units', '20 square units'],
+                    correctAnswer: 1,
+                    explanation: 'Area = length × width = 5 × 3 = 15 square units.'
+                },
+                {
+                    id: 'area2',
+                    type: 'multiple-choice',
+                    question: 'A square has sides that are 4 units long. What is the perimeter?',
+                    options: ['8 units', '12 units', '16 units', '20 units'],
+                    correctAnswer: 2,
+                    explanation: 'Perimeter = 4 + 4 + 4 + 4 = 16 units, or 4 × 4 = 16 units.'
+                },
+                {
+                    id: 'area3',
+                    type: 'short-answer',
+                    question: 'A rectangle is 6 units long and 4 units wide. What is the area? (Just write the number)',
+                    correctAnswer: '24',
+                    explanation: 'Area = 6 × 4 = 24 square units.'
+                },
+                {
+                    id: 'area4',
+                    type: 'multiple-choice',
+                    question: 'A rectangle has a length of 8 units and a width of 2 units. What is the perimeter?',
+                    options: ['10 units', '16 units', '20 units', '18 units'],
+                    correctAnswer: 2,
+                    explanation: 'Perimeter = 8 + 2 + 8 + 2 = 20 units, or 2 × (8 + 2) = 20 units.'
+                },
+                {
+                    id: 'area5',
+                    type: 'multiple-choice',
+                    question: 'Look at the rectangle. Count the squares to find the area.',
+                    visual: 'area',
+                    visualData: { length: 4, width: 3 },
+                    options: ['7 square units', '12 square units', '14 square units', '10 square units'],
+                    correctAnswer: 1,
+                    explanation: 'Count the squares: 4 rows × 3 columns = 12 square units.'
+                },
+                {
+                    id: 'area6',
+                    type: 'short-answer',
+                    question: 'A square has sides of 5 units. What is the perimeter? (Just write the number)',
+                    correctAnswer: '20',
+                    explanation: 'Perimeter = 5 + 5 + 5 + 5 = 20 units.'
+                },
+                {
+                    id: 'area7',
+                    type: 'multiple-choice',
+                    question: 'A rectangle is 7 units long and 3 units wide. What is the area?',
+                    options: ['10 square units', '20 square units', '21 square units', '24 square units'],
+                    correctAnswer: 2,
+                    explanation: 'Area = 7 × 3 = 21 square units.'
+                },
+                {
+                    id: 'area8',
+                    type: 'multiple-choice',
+                    question: 'A rectangle has a perimeter of 18 units. If the length is 6 units, what is the width?',
+                    options: ['2 units', '3 units', '4 units', '5 units'],
+                    correctAnswer: 1,
+                    explanation: 'Perimeter = 2 × (length + width). 18 = 2 × (6 + width). So 9 = 6 + width, which means width = 3 units.'
+                }
+            ],
+            
+            'word-problems': [
+                {
+                    id: 'wp1',
+                    type: 'multiple-choice',
+                    question: 'Sentence Frame: "I need to find..."\n\nLily has 15 stickers. She gives away 5 stickers. Then she buys 8 more stickers. How many stickers does Lily have now?',
+                    options: ['18 stickers', '20 stickers', '22 stickers', '28 stickers'],
+                    correctAnswer: 0,
+                    explanation: 'Step 1: 15 - 5 = 10 stickers after giving away. Step 2: 10 + 8 = 18 stickers after buying more.'
+                },
+                {
+                    id: 'wp2',
+                    type: 'multiple-choice',
+                    question: 'Sentence Frame: "First I will... Then I will..."\n\nThere are 24 students in a class. 8 students are absent. The teacher wants to put the remaining students into groups of 4. How many groups will there be?',
+                    options: ['3 groups', '4 groups', '5 groups', '6 groups'],
+                    correctAnswer: 1,
+                    explanation: 'Step 1: 24 - 8 = 16 students present. Step 2: 16 ÷ 4 = 4 groups.'
+                },
+                {
+                    id: 'wp3',
+                    type: 'short-answer',
+                    question: 'Sentence Frame: "I need to find..."\n\nTom has 30 toy cars. He gives 12 to his friend. Then he gets 15 more from his brother. How many toy cars does Tom have now? (Just write the number)',
+                    correctAnswer: '33',
+                    explanation: 'Step 1: 30 - 12 = 18 cars after giving away. Step 2: 18 + 15 = 33 cars after getting more.'
+                },
+                {
+                    id: 'wp4',
+                    type: 'multiple-choice',
+                    question: 'Sentence Frame: "First I will... Then I will..."\n\nA store has 50 pencils. They sell 20 pencils in the morning and 15 pencils in the afternoon. How many pencils are left?',
+                    options: ['10 pencils', '15 pencils', '20 pencils', '25 pencils'],
+                    correctAnswer: 1,
+                    explanation: 'Step 1: 20 + 15 = 35 pencils sold total. Step 2: 50 - 35 = 15 pencils left.'
+                },
+                {
+                    id: 'wp5',
+                    type: 'multiple-choice',
+                    question: 'Sentence Frame: "I need to find..."\n\nMaria has 3 boxes of markers. Each box has 8 markers. She uses 5 markers. How many markers does she have left?',
+                    options: ['19 markers', '20 markers', '21 markers', '24 markers'],
+                    correctAnswer: 0,
+                    explanation: 'Step 1: 3 × 8 = 24 markers total. Step 2: 24 - 5 = 19 markers left.'
+                },
+                {
+                    id: 'wp6',
+                    type: 'short-answer',
+                    question: 'Sentence Frame: "First I will... Then I will..."\n\nThere are 36 cookies. 12 cookies are chocolate chip. The rest are oatmeal. If the oatmeal cookies are shared equally among 4 friends, how many oatmeal cookies does each friend get? (Just write the number)',
+                    correctAnswer: '6',
+                    explanation: 'Step 1: 36 - 12 = 24 oatmeal cookies. Step 2: 24 ÷ 4 = 6 cookies per friend.'
+                },
+                {
+                    id: 'wp7',
+                    type: 'multiple-choice',
+                    question: 'Sentence Frame: "I need to find..."\n\nA garden has 4 rows of flowers. Each row has 6 flowers. 8 flowers are red. How many flowers are NOT red?',
+                    options: ['14 flowers', '16 flowers', '18 flowers', '20 flowers'],
+                    correctAnswer: 1,
+                    explanation: 'Step 1: 4 × 6 = 24 flowers total. Step 2: 24 - 8 = 16 flowers that are not red.'
+                },
+                {
+                    id: 'wp8',
+                    type: 'multiple-choice',
+                    question: 'Sentence Frame: "First I will... Then I will..."\n\nJake has 40 stickers. He gives 10 stickers to his sister and 8 stickers to his friend. Then he buys 12 more stickers. How many stickers does Jake have now?',
+                    options: ['32 stickers', '34 stickers', '36 stickers', '38 stickers'],
+                    correctAnswer: 1,
+                    explanation: 'Step 1: 10 + 8 = 18 stickers given away. Step 2: 40 - 18 = 22 stickers left. Step 3: 22 + 12 = 34 stickers now.'
+                }
+            ],
+            
+            vocabulary: [
+                {
+                    id: 'vocab1',
+                    type: 'multiple-choice',
+                    question: 'What does "product" mean in math?',
+                    options: ['The answer to addition', 'The answer to multiplication', 'The answer to subtraction', 'The answer to division'],
+                    correctAnswer: 1,
+                    explanation: 'Product is the answer when you multiply numbers together. For example, 3 × 4 = 12, and 12 is the product.'
+                },
+                {
+                    id: 'vocab2',
+                    type: 'multiple-choice',
+                    question: 'What does "quotient" mean in math?',
+                    options: ['The answer to addition', 'The answer to multiplication', 'The answer to division', 'The answer to subtraction'],
+                    correctAnswer: 2,
+                    explanation: 'Quotient is the answer when you divide numbers. For example, 12 ÷ 3 = 4, and 4 is the quotient.'
+                },
+                {
+                    id: 'vocab3',
+                    type: 'multiple-choice',
+                    question: 'What does "sum" mean in math?',
+                    options: ['The answer to addition', 'The answer to multiplication', 'The answer to subtraction', 'The answer to division'],
+                    correctAnswer: 0,
+                    explanation: 'Sum is the answer when you add numbers together. For example, 5 + 3 = 8, and 8 is the sum.'
+                },
+                {
+                    id: 'vocab4',
+                    type: 'multiple-choice',
+                    question: 'What does "difference" mean in math?',
+                    options: ['The answer to addition', 'The answer to multiplication', 'The answer to subtraction', 'The answer to division'],
+                    correctAnswer: 2,
+                    explanation: 'Difference is the answer when you subtract numbers. For example, 10 - 4 = 6, and 6 is the difference.'
+                },
+                {
+                    id: 'vocab5',
+                    type: 'multiple-choice',
+                    question: 'What does "area" mean?',
+                    options: ['The distance around a shape', 'The space inside a shape', 'The length of a shape', 'The height of a shape'],
+                    correctAnswer: 1,
+                    explanation: 'Area is the amount of space inside a shape. We measure it in square units.'
+                },
+                {
+                    id: 'vocab6',
+                    type: 'multiple-choice',
+                    question: 'What does "perimeter" mean?',
+                    options: ['The distance around a shape', 'The space inside a shape', 'The length of a shape', 'The height of a shape'],
+                    correctAnswer: 0,
+                    explanation: 'Perimeter is the distance around the outside of a shape. You add up all the sides.'
+                },
+                {
+                    id: 'vocab7',
+                    type: 'multiple-choice',
+                    question: 'What does "equivalent" mean?',
+                    options: ['Different', 'Equal or the same value', 'Greater than', 'Less than'],
+                    correctAnswer: 1,
+                    explanation: 'Equivalent means equal or having the same value. For example, 1/2 and 2/4 are equivalent fractions.'
+                },
+                {
+                    id: 'vocab8',
+                    type: 'multiple-choice',
+                    question: 'What does "factor" mean in multiplication?',
+                    options: ['The answer', 'The numbers you multiply together', 'The sign', 'The operation'],
+                    correctAnswer: 1,
+                    explanation: 'Factors are the numbers you multiply together. In 3 × 4 = 12, both 3 and 4 are factors.'
+                }
+            ],
+            
+            practice: [
+                {
+                    id: 'prac1',
+                    type: 'multiple-choice',
+                    question: 'SBAC Style: Which expression is equal to 7 × 6?',
+                    options: ['7 + 6', '7 + 7 + 7 + 7 + 7 + 7', '6 + 6 + 6 + 6 + 6', '7 × 7 × 7 × 7 × 7 × 7'],
+                    correctAnswer: 1,
+                    explanation: '7 × 6 means 7 added 6 times, which is 7 + 7 + 7 + 7 + 7 + 7.'
+                },
+                {
+                    id: 'prac2',
+                    type: 'multiple-choice',
+                    question: 'SBAC Style: A rectangle has a length of 9 units and a width of 4 units. What is the area?',
+                    options: ['13 square units', '26 square units', '36 square units', '40 square units'],
+                    correctAnswer: 2,
+                    explanation: 'Area = length × width = 9 × 4 = 36 square units.'
+                },
+                {
+                    id: 'prac3',
+                    type: 'multiple-choice',
+                    question: 'SBAC Style: Which fraction is equivalent to 2/3?',
+                    options: ['3/4', '4/6', '2/4', '1/3'],
+                    correctAnswer: 1,
+                    explanation: '2/3 = 4/6 because if you multiply both numerator and denominator by 2, you get 4/6.'
+                },
+                {
+                    id: 'prac4',
+                    type: 'short-answer',
+                    question: 'SBAC Style: There are 48 students. They need to be divided into groups of 6. How many groups will there be? (Just write the number)',
+                    correctAnswer: '8',
+                    explanation: '48 ÷ 6 = 8 groups.'
+                },
+                {
+                    id: 'prac5',
+                    type: 'multiple-choice',
+                    question: 'SBAC Style: Look at the number line. What fraction is at point B?',
+                    visual: 'number-line',
+                    visualData: { min: 0, max: 1, point: 0.75, label: 'B' },
+                    options: ['1/2', '2/3', '3/4', '4/5'],
+                    correctAnswer: 2,
+                    explanation: 'Point B is three-fourths of the way from 0 to 1, so it shows 3/4.'
+                },
+                {
+                    id: 'prac6',
+                    type: 'multiple-choice',
+                    question: 'SBAC Style: Maria has 25 stickers. She gives 7 to her friend and 5 to her sister. How many stickers does she have left?',
+                    options: ['11 stickers', '13 stickers', '15 stickers', '17 stickers'],
+                    correctAnswer: 1,
+                    explanation: 'Step 1: 7 + 5 = 12 stickers given away. Step 2: 25 - 12 = 13 stickers left.'
+                },
+                {
+                    id: 'prac7',
+                    type: 'short-answer',
+                    question: 'SBAC Style: What is the perimeter of a square with sides of 7 units? (Just write the number)',
+                    correctAnswer: '28',
+                    explanation: 'Perimeter = 7 + 7 + 7 + 7 = 28 units, or 4 × 7 = 28 units.'
+                },
+                {
+                    id: 'prac8',
+                    type: 'multiple-choice',
+                    question: 'SBAC Style: Which comparison is true?',
+                    options: ['1/3 > 1/2', '2/4 = 1/2', '3/4 < 1/2', '1/4 > 1/2'],
+                    correctAnswer: 1,
+                    explanation: '2/4 = 1/2 because both fractions represent the same value (half of a whole).'
+                }
+            ]
+        };
+
+        // ============================================
+        // LOAD QUESTIONS FUNCTION
+        // ============================================
+        function loadQuestions(sectionId) {
+            const sectionQuestions = questions[sectionId];
+            const containerId = sectionId === 'word-problems' ? 'word-problems-questions' : sectionId + '-questions';
+            const container = document.getElementById(containerId);
+            
+            if (!container) return;
+            
+            // Count total questions for progress tracking
+            totalQuestions = sectionQuestions.length;
+            
+            container.innerHTML = '';
+            
+            sectionQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question-container';
+                questionDiv.id = `q-${q.id}`;
+                
+                let questionHTML = `
+                    <div class="question-number">Question ${index + 1} of ${sectionQuestions.length}</div>
+                    <div class="question-text">${q.question.replace(/\n/g, '<br>')}</div>
+                `;
+                
+                // Add visual models if needed
+                if (q.visual === 'array') {
+                    questionHTML += createArrayVisual(q.visualData);
+                } else if (q.visual === 'number-line') {
+                    questionHTML += createNumberLineVisual(q.visualData);
+                } else if (q.visual === 'area') {
+                    questionHTML += createAreaVisual(q.visualData);
+                }
+                
+                // Add sentence frame styling if it's a word problem
+                if (q.question.includes('Sentence Frame:')) {
+                    const frameMatch = q.question.match(/Sentence Frame: "([^"]+)"/);
+                    if (frameMatch) {
+                        questionHTML += `<div class="sentence-frame">💡 Sentence Frame: "${frameMatch[1]}"</div>`;
+                    }
+                }
+                
+                // Add answer options based on question type
+                if (q.type === 'multiple-choice') {
+                    questionHTML += '<div class="answer-options">';
+                    q.options.forEach((option, optIndex) => {
+                        questionHTML += `
+                            <button class="answer-btn" onclick="checkAnswer('${q.id}', ${optIndex}, ${q.correctAnswer}, '${q.explanation.replace(/'/g, "\\'")}')">
+                                ${option}
+                            </button>
+                        `;
+                    });
+                    questionHTML += '</div>';
+                } else if (q.type === 'short-answer') {
+                    questionHTML += `
+                        <input type="text" class="answer-input" id="input-${q.id}" placeholder="Type your answer">
+                        <button class="submit-btn" onclick="checkShortAnswer('${q.id}', '${q.correctAnswer}', '${q.explanation.replace(/'/g, "\\'")}')">Submit</button>
+                    `;
+                }
+                
+                questionHTML += `<div id="feedback-${q.id}"></div>`;
+                
+                questionDiv.innerHTML = questionHTML;
+                container.appendChild(questionDiv);
+            });
+        }
+
+        // ============================================
+        // VISUAL MODEL CREATION FUNCTIONS
+        // ============================================
+        function createArrayVisual(data) {
+            let html = '<div class="visual-model"><div class="array-model">';
+            for (let i = 0; i < data.rows; i++) {
+                for (let j = 0; j < data.cols; j++) {
+                    html += '<div class="array-cell">●</div>';
+                }
+            }
+            html += '</div></div>';
+            return html;
+        }
+
+        function createNumberLineVisual(data) {
+            let html = '<div class="visual-model"><div class="number-line">';
+            const ticks = 5;
+            const pointPosition = (data.point - data.min) / (data.max - data.min) * 100;
+            
+            for (let i = 0; i <= ticks; i++) {
+                const position = (i / ticks) * 100;
+                html += `<div class="number-line-tick" style="left: ${position}%"></div>`;
+                html += `<div class="number-line-label" style="left: ${position}%">${data.min + (data.max - data.min) * (i / ticks)}</div>`;
+            }
+            
+            // Add the point marker
+            html += `<div style="position: absolute; left: ${pointPosition}%; bottom: 0; width: 20px; height: 20px; background: #f44336; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);"></div>`;
+            html += `<div style="position: absolute; left: ${pointPosition}%; bottom: -40px; font-weight: bold; color: #f44336;">${data.label}</div>`;
+            
+            html += '</div></div>';
+            return html;
+        }
+
+        function createAreaVisual(data) {
+            let html = '<div class="visual-model"><div class="area-model" style="display: inline-grid; grid-template-columns: repeat(' + data.length + ', 30px); gap: 2px;">';
+            for (let i = 0; i < data.length * data.width; i++) {
+                html += '<div class="area-unit"></div>';
+            }
+            html += '</div></div>';
+            return html;
+        }
+
+        // ============================================
+        // ANSWER CHECKING FUNCTIONS
+        // ============================================
+        function checkAnswer(questionId, selectedIndex, correctIndex, explanation) {
+            const feedbackDiv = document.getElementById(`feedback-${questionId}`);
+            const buttons = document.querySelectorAll(`#q-${questionId} .answer-btn`);
+            
+            // Disable all buttons
+            buttons.forEach(btn => btn.disabled = true);
+            
+            // Check if correct
+            const isCorrect = selectedIndex === correctIndex;
+            
+            // Update button styles
+            buttons.forEach((btn, index) => {
+                if (index === correctIndex) {
+                    btn.classList.add('correct');
+                }
+                if (index === selectedIndex && !isCorrect) {
+                    btn.classList.add('incorrect');
+                }
+            });
+            
+            // Show feedback
+            if (isCorrect) {
+                feedbackDiv.innerHTML = `
+                    <div class="feedback correct">
+                        ✅ Correct! Great job!
+                        <div class="explanation">${explanation}</div>
+                    </div>
+                `;
+                totalScore += 10;
+                totalQuestionsAnswered++;
+                showEncouragement();
+            } else {
+                feedbackDiv.innerHTML = `
+                    <div class="feedback incorrect">
+                        ❌ Not quite. Try again next time!
+                        <div class="explanation">${explanation}</div>
+                    </div>
+                `;
+                totalQuestionsAnswered++;
+            }
+            
+            updateProgress();
+        }
+
+        function checkShortAnswer(questionId, correctAnswer, explanation) {
+            const input = document.getElementById(`input-${questionId}`);
+            const feedbackDiv = document.getElementById(`feedback-${questionId}`);
+            const userAnswer = input.value.trim().toLowerCase();
+            const correctAnswerLower = correctAnswer.toLowerCase();
+            
+            // Disable input and button
+            input.disabled = true;
+            const submitBtn = input.nextElementSibling;
+            submitBtn.disabled = true;
+            
+            // Check if correct (allow for variations)
+            const isCorrect = userAnswer === correctAnswerLower || 
+                            userAnswer === correctAnswerLower + ' units' ||
+                            userAnswer === correctAnswerLower + ' square units';
+            
+            if (isCorrect) {
+                feedbackDiv.innerHTML = `
+                    <div class="feedback correct">
+                        ✅ Correct! Great job!
+                        <div class="explanation">${explanation}</div>
+                    </div>
+                `;
+                input.style.borderColor = '#4CAF50';
+                input.style.background = '#d4edda';
+                totalScore += 10;
+                totalQuestionsAnswered++;
+                showEncouragement();
+            } else {
+                feedbackDiv.innerHTML = `
+                    <div class="feedback incorrect">
+                        ❌ Not quite. The correct answer is ${correctAnswer}.
+                        <div class="explanation">${explanation}</div>
+                    </div>
+                `;
+                input.style.borderColor = '#f44336';
+                input.style.background = '#f8d7da';
+                totalQuestionsAnswered++;
+            }
+            
+            updateProgress();
+        }
+
+        // ============================================
+        // PROGRESS AND ENCOURAGEMENT FUNCTIONS
+        // ============================================
+        function updateProgress() {
+            document.getElementById('totalScore').textContent = totalScore;
+            
+            if (totalQuestionsAnswered > 0) {
+                const percentage = Math.round((totalQuestionsAnswered / totalQuestions) * 100);
+                const progressBar = document.getElementById('progressBar');
+                progressBar.style.width = percentage + '%';
+                progressBar.textContent = percentage + '%';
+            }
+        }
+
+        function showEncouragement() {
+            const encouragements = [
+                '🌟 Awesome! Keep going!',
+                '💪 You\'re doing great!',
+                '⭐ Super star!',
+                '🎉 Fantastic!',
+                '🚀 You\'re amazing!',
+                '✨ Wonderful work!'
+            ];
+            
+            const randomEncouragement = encouragements[Math.floor(Math.random() * encouragements.length)];
+            const encouragementDiv = document.createElement('div');
+            encouragementDiv.className = 'encouragement';
+            encouragementDiv.textContent = randomEncouragement;
+            
+            const activeSection = document.querySelector('.section.active');
+            activeSection.insertBefore(encouragementDiv, activeSection.firstChild);
+            
+            setTimeout(() => {
+                encouragementDiv.remove();
+            }, 2000);
+        }
+
+        // ============================================
+        // INITIALIZE ON PAGE LOAD
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
